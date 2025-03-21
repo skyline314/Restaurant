@@ -1,9 +1,14 @@
 package main;
 
 import restaurant.Restaurant;
+import restaurant.Food;
 import restaurant.Menu;
+
 import people.Chef;
 import people.Visitor;
+
+import java.text.NumberFormat; 
+import java.util.Locale; 
 
 public class Main {
 
@@ -27,14 +32,18 @@ public class Main {
 		
 		Menu dessert = new Menu("Dessert");
 		
-		dessert.add(new Food("Ice Cream"), 1000);
+		dessert.add(new Food("Ice Cream", 1000));
 		dessert.add(new Food("Es Pisang Ijo", 23000));
 		dessert.add(new Food("Jus Emas", 999000));
 		
 		restaurant.addMenu(dessert);
 		
+		//saya tambahkan method menambahkan chef ke restaurant
+		restaurant.addChef(chef1);
+		restaurant.addChef(chef2);
+		
 		restaurant.showMenu();
-		restaurant.showChef();
+		restaurant.showChef(); // tidak ada method untuk menambahkan chef ke objek restaurant
 		
 		restaurant.order(chef1, visitor1, "Nasi Bakar", 2);
 		restaurant.order(chef1, visitor1, "Jus Emas", 2);
@@ -50,4 +59,10 @@ public class Main {
 		
 		restaurant.showTotalIncome();
 	}
+	
+	//untuk number formating
+	public static String formatIDR(int amount) { 
+		NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("id", "ID")); 
+		return formatter.format(amount); 
+	} 
 }
